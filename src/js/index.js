@@ -1,7 +1,7 @@
 import '../css/styles.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import debounce from 'lodash.debounce';
-import { API } from './fetchCountries';
+import { ApiService } from './fetchCountries';
 
 const DEBOUNCE_DELAY = 300;
 
@@ -11,26 +11,53 @@ const refs = {
   info: document.querySelector('.country-info'),
 };
 
-refs.input.addEventListener('input', debounce(onInputChange, 300));
+const apiService = new ApiService();
 
-function onInputChange() {
-  console.log('debounce');
-}
+refs.input.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELAY));
 
-const fetchCountries = function () {
-  return fetch('https://restcountries.com/v2/all')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(response.status);
-      }
-      return response.json();
-    })
+function onInputChange(event) {
+  apiService.query = event.target.value.trim().toLowerCase();
+  if (apiService.searchQuery === '') {
+    return;
+  }
+  apiService
+    .fetchCountries()
     .then(data => {
-      console.log(data);
+      if (data.length > 10) {
+        Notify.info(
+          'Too many matches found. Please enter a more specific name.'
+        );
+      }
     })
     .catch(error => {
-      console.log(error);
+      Notify.failure('Oops, there is no country with that name');
     });
-};
+}
 
-fetchCountries();
+function createMarkupElement() {}
+
+/*html*/ `<h2>
+  <img src="" alt="" />
+  <p></p>
+</h2>
+<ul>
+  <li>
+    <p></p>
+    <span></span>
+  </li>
+  <li>
+    <p></p>
+    <span></span>
+  </li>
+  <li>
+    <p></p>
+    <span></span>
+  </li>
+</ul>`;
+
+function createMarkupList() {}
+
+/*html*/ `<li>
+  <img src="" alt="" />
+  <p></p>
+</li>;`;

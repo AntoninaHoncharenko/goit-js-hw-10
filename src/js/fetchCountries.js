@@ -1,33 +1,26 @@
-export class API {
+export class ApiService {
+  constructor() {
+    this.searchQuery = '';
+  }
+
   fetchCountries() {
-    return fetch('https://restcountries.com/v2/name/peru')
-      .then(response => {
+    console.log(this.searchQuery);
+
+    return fetch(`https://restcountries.com/v2/name/${this.searchQuery}`).then(
+      response => {
         if (!response.ok) {
           throw new Error(response.status);
         }
         return response.json();
-      })
-      .then(data => {
-        console.log(data);
-      })
-      .catch(error => {
-        console.log(error);
-      });
+      }
+    );
+  }
+
+  get query() {
+    return this.searchQuery;
+  }
+
+  set query(newQuery) {
+    this.searchQuery = newQuery;
   }
 }
-
-// function fetchCountries() {
-//   return fetch('https://restcountries.com/v2/name/peru')
-//     .then(response => {
-//       if (!response.ok) {
-//         throw new Error(response.status);
-//       }
-//       return response.json();
-//     })
-//     .then(data => {
-//       console.log(data);
-//     })
-//     .catch(error => {
-//       console.log(error);
-//     });
-// }
