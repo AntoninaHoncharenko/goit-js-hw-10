@@ -2,6 +2,7 @@ import '../css/styles.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import debounce from 'lodash.debounce';
 import { ApiService } from './fetchCountries';
+import { createMarkupElement, createMarkupList } from './createMarkup';
 
 const DEBOUNCE_DELAY = 300;
 
@@ -28,36 +29,26 @@ function onInputChange(event) {
           'Too many matches found. Please enter a more specific name.'
         );
       }
+
+      if (data.length === 1) {
+        const markupElement = createMarkupElement(data);
+        refs.info.insertAdjacentHTML('beforeend', markupElement);
+      } else {
+        refs.info.innerHTML = '';
+      }
+
+      if (data.length > 1 && data.length <= 10) {
+        data.forEach(country => {
+          console.log(country);
+          const markupList = createMarkupList(country);
+          refs.list.insertAdjacentHTML('beforeend', markupList);
+          console.log(markupList);
+        });
+      } else {
+        refs.list.innerHTML = '';
+      }
     })
     .catch(error => {
       Notify.failure('Oops, there is no country with that name');
     });
 }
-
-function createMarkupElement() {}
-
-/*html*/ `<h2>
-  <img src="" alt="" />
-  <p></p>
-</h2>
-<ul>
-  <li>
-    <p></p>
-    <span></span>
-  </li>
-  <li>
-    <p></p>
-    <span></span>
-  </li>
-  <li>
-    <p></p>
-    <span></span>
-  </li>
-</ul>`;
-
-function createMarkupList() {}
-
-/*html*/ `<li>
-  <img src="" alt="" />
-  <p></p>
-</li>;`;
