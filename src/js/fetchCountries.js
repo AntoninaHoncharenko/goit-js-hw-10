@@ -4,8 +4,6 @@ export class ApiService {
   }
 
   fetchCountries() {
-    console.log(this.searchQuery);
-
     return fetch(`https://restcountries.com/v2/name/${this.searchQuery}`).then(
       response => {
         if (!response.ok) {

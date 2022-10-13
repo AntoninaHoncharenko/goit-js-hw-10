@@ -39,10 +39,8 @@ function onInputChange(event) {
 
       if (data.length > 1 && data.length <= 10) {
         data.forEach(country => {
-          console.log(country);
           const markupList = createMarkupList(country);
           refs.list.insertAdjacentHTML('beforeend', markupList);
-          console.log(markupList);
         });
       } else {
         refs.list.innerHTML = '';
@@ -50,5 +48,7 @@ function onInputChange(event) {
     })
     .catch(error => {
       Notify.failure('Oops, there is no country with that name');
+      refs.list.innerHTML = '';
+      refs.info.innerHTML = '';
     });
 }
