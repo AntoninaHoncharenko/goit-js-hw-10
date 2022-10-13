@@ -19,6 +19,8 @@ refs.input.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELAY));
 function onInputChange(event) {
   apiService.query = event.target.value.trim().toLowerCase();
   if (apiService.searchQuery === '') {
+    refs.list.innerHTML = '';
+    refs.info.innerHTML = '';
     return;
   }
   apiService
