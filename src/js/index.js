@@ -34,7 +34,7 @@ function onInputChange(event) {
         const markupElement = createMarkupElement(data);
         refs.info.insertAdjacentHTML('beforeend', markupElement);
       } else {
-        refs.info.innerHTML = '';
+        // refs.info.innerHTML = '';
       }
 
       if (data.length > 1 && data.length <= 10) {
@@ -43,12 +43,12 @@ function onInputChange(event) {
           refs.list.insertAdjacentHTML('beforeend', markupList);
         });
       } else {
-        refs.list.innerHTML = '';
+        // refs.list.innerHTML = '';
       }
     })
     .catch(error => {
       Notify.failure('Oops, there is no country with that name');
-      refs.list.innerHTML = '';
-      refs.info.innerHTML = '';
+      // refs.list.innerHTML = '';
+      // refs.info.innerHTML = '';
     });
 }
