@@ -31,7 +31,6 @@ function onInputChange(event) {
       }
 
       if (data.length === 1) {
-        console.log(data);
         const markupElement = createMarkupElement(data);
         refs.info.insertAdjacentHTML('beforeend', markupElement);
       } else {
@@ -48,8 +47,8 @@ function onInputChange(event) {
       }
     })
     .catch(error => {
-      // Notify.failure('Oops, there is no country with that name');
-      // refs.list.innerHTML = '';
-      // refs.info.innerHTML = '';
+      Notify.failure('Oops, there is no country with that name');
+      refs.list.innerHTML = '';
+      refs.info.innerHTML = '';
     });
 }
