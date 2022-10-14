@@ -4,14 +4,14 @@ export class ApiService {
   }
 
   fetchCountries() {
-    return fetch(`https://restcountries.com/v2/name/${this.searchQuery}`).then(
-      response => {
-        if (!response.ok) {
-          throw new Error(response.status);
-        }
-        return response.json();
+    return fetch(
+      `https://restcountries.com/v3.1/name/${this.searchQuery}`
+    ).then(response => {
+      if (!response.ok) {
+        throw new Error(response.status);
       }
-    );
+      return response.json();
+    });
   }
 
   get query() {
