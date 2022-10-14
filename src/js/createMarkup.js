@@ -2,7 +2,7 @@ export function createMarkupList(data) {
   const { name, flags } = data;
   return `<li>
   <img src="${flags.svg}" alt="flag" width="40px" height=""30px/>
-  <p>${name.common}</p>
+  <p>${name.official}</p>
 </li>`;
 }
 
@@ -11,7 +11,7 @@ export function createMarkupElement(data) {
 
   return `<h2>
   <img src="${flags.svg}" alt="flag" width="200px" height=""100px/>
-  <p>${name.common}</p>
+  <p>${name.official}</p>
 </h2>
 <ul>
   <li>

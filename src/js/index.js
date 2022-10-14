@@ -18,9 +18,8 @@ refs.input.addEventListener('input', debounce(onInputChange, DEBOUNCE_DELAY));
 
 function onInputChange(event) {
   apiService.query = event.target.value.trim().toLowerCase();
+  clearMarkup();
   if (apiService.searchQuery === '') {
-    refs.list.innerHTML = '';
-    refs.info.innerHTML = '';
     return;
   }
   apiService
@@ -36,7 +35,6 @@ function onInputChange(event) {
         const markupElement = createMarkupElement(data);
         refs.info.insertAdjacentHTML('beforeend', markupElement);
       } else {
-        refs.info.innerHTML = '';
       }
 
       if (data.length > 1 && data.length <= 10) {
@@ -45,12 +43,14 @@ function onInputChange(event) {
           refs.list.insertAdjacentHTML('beforeend', markupList);
         });
       } else {
-        refs.list.innerHTML = '';
       }
     })
     .catch(error => {
       Notify.failure('Oops, there is no country with that name');
-      refs.list.innerHTML = '';
-      refs.info.innerHTML = '';
     });
+}
+
+function clearMarkup() {
+  refs.list.innerHTML = '';
+  refs.info.innerHTML = '';
 }
